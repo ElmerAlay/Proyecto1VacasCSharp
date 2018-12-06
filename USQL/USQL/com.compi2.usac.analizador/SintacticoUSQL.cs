@@ -5,11 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using Irony.Ast;
 using Irony.Parsing;
-using WINGRAPHVIZLib;
 using System.Drawing;
 using System.IO;
 using USQL.com.compi2.usac.controlDot;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace USQL.com.compi2.usac.analizador
 {
@@ -37,21 +37,18 @@ namespace USQL.com.compi2.usac.analizador
         private static void generarImagen(ParseTreeNode raiz)
         {
             String grafoDot = ControlDot.getDot(raiz);
-            MessageBox.Show(grafoDot);
-            try
-            {
-                WINGRAPHVIZLib.DOT dot = new WINGRAPHVIZLib.DOT();
-                WINGRAPHVIZLib.BinaryImage img = dot.ToPNG(grafoDot);
-                byte[] imageBytes = Convert.FromBase64String(img.ToBase64String());
-                MemoryStream ms = new MemoryStream(imageBytes, 0, imageBytes.Length);
-                ms.Write(imageBytes, 0, imageBytes.Length);
-                Image imagen = Image.FromStream(ms, true);
-                img.Save("AST.png");
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.ToString());
-            }
+
+            TextWriter file = new StreamWriter("ast.dot");
+            file.WriteLine(grafoDot);
+            file.Close();
+
+            TextWriter bat = new StreamWriter("file.bat");
+            bat.WriteLine("@echo off");
+            bat.WriteLine("cd C:\\Program Files\\Java\\jre1.8.0_161\\bin\\javaw.exe");
+            bat.WriteLine("dot -Tpng ast.dot -o ast.png");
+            bat.Close();
+
+            System.Diagnostics.Process.Start("file.bat");
         }
     }
 }
