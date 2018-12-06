@@ -15,6 +15,7 @@ namespace USQL.com.compi2.usac.analizador
         {
             #region EXPRESIONES REGULARES
             RegexBasedTerminal numero = new RegexBasedTerminal("numero", "[0-9]+");
+            IdentifierTerminal id = new IdentifierTerminal("id");
             #endregion
 
             #region TERMINALES
@@ -35,7 +36,8 @@ namespace USQL.com.compi2.usac.analizador
                 | E + minus + E
                 | E + mult + E
                 | E + div + E
-                | numero;
+                | numero
+                | id;
             #endregion
 
             #region PREFERENCIAS

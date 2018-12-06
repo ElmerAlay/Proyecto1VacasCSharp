@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="com.compi2.usac.analizador\GramaticaUSQL.cs" />
     <Compile Include="com.compi2.usac.analizador\SintacticoUSQL.cs" />
+    <Compile Include="com.compi2.usac.controlDot\ControlDot.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -85,6 +86,18 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="com.compi2.usac.analizador.herramientas\Irony.dll" />
+    <Content Include="com.compi2.usac.analizador.herramientas\WinGraphviz.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="WINGRAPHVIZLib">
+      <Guid>{052DB09C-95F7-43BD-B7F8-492373D1151E}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
