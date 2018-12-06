@@ -30,6 +30,7 @@ namespace USQL.com.compi2.usac.analizador
 
             generarImagen(raiz);
             MessageBox.Show("Imagen generada");
+            RecorridoUSQL.resultado(raiz);
 
             return true;
         }

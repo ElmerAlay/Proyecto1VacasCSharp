@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="com.compi2.usac.analizador\GramaticaUSQL.cs" />
+    <Compile Include="com.compi2.usac.analizador\RecorridoUSQL.cs" />
     <Compile Include="com.compi2.usac.analizador\SintacticoUSQL.cs" />
     <Compile Include="com.compi2.usac.controlDot\ControlDot.cs" />
     <Compile Include="Form1.cs">
