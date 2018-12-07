@@ -36,12 +36,16 @@ namespace USQL.com.compi2.usac.analizador
                 | E + minus + E
                 | E + mult + E
                 | E + div + E
+                | ToTerm("(") + E + ToTerm(")")
                 | numero
                 | id;
             #endregion
 
             #region PREFERENCIAS
             this.Root = S;
+            this.RegisterOperators(20, Associativity.Left, plus, minus);
+            this.RegisterOperators(30, Associativity.Left, mult, div);
+            this.MarkPunctuation("(", ")");
             #endregion
         }
     }

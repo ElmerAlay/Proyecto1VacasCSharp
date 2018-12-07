@@ -28,9 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.rtb_entrada = new System.Windows.Forms.RichTextBox();
             this.rtb_consola = new System.Windows.Forms.RichTextBox();
             this.btn_analizar = new System.Windows.Forms.Button();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.escucha = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // rtb_entrada
@@ -59,17 +62,34 @@
             this.btn_analizar.UseVisualStyleBackColor = true;
             this.btn_analizar.Click += new System.EventHandler(this.btn_analizar_Click);
             // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // escucha
+            // 
+            this.escucha.AutoSize = true;
+            this.escucha.Location = new System.Drawing.Point(277, 13);
+            this.escucha.Name = "escucha";
+            this.escucha.Size = new System.Drawing.Size(89, 21);
+            this.escucha.TabIndex = 3;
+            this.escucha.Text = "Escuchar";
+            this.escucha.UseVisualStyleBackColor = true;
+            this.escucha.CheckedChanged += new System.EventHandler(this.escucha_CheckedChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(282, 253);
+            this.ClientSize = new System.Drawing.Size(362, 253);
+            this.Controls.Add(this.escucha);
             this.Controls.Add(this.btn_analizar);
             this.Controls.Add(this.rtb_consola);
             this.Controls.Add(this.rtb_entrada);
             this.Name = "Form1";
             this.Text = "Form1";
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -78,6 +98,8 @@
         private System.Windows.Forms.RichTextBox rtb_entrada;
         private System.Windows.Forms.RichTextBox rtb_consola;
         private System.Windows.Forms.Button btn_analizar;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.CheckBox escucha;
     }
 }
 
