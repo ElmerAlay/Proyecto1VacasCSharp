@@ -48,9 +48,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="com.compi2.usac.analizador\GramaticaUSQL.cs" />
-    <Compile Include="com.compi2.usac.analizador\RecorridoUSQL.cs" />
-    <Compile Include="com.compi2.usac.analizador\SintacticoUSQL.cs" />
+    <Compile Include="com.compi2.usac.analizadorPlyCS\GramaticaPlyCS.cs" />
+    <Compile Include="com.compi2.usac.analizadorUSQL\GramaticaUSQL.cs" />
+    <Compile Include="com.compi2.usac.analizadorUSQL\RecorridoUSQL.cs" />
+    <Compile Include="com.compi2.usac.analizadorUSQL\SintacticoUSQL.cs" />
     <Compile Include="com.compi2.usac.controlDot\ControlDot.cs" />
     <Compile Include="com.compi2.usac.socket\Servidor.cs" />
     <Compile Include="Form1.cs">
