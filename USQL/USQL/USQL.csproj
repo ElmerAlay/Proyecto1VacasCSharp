@@ -49,6 +49,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="com.compi2.usac.analizadorPlyCS\GramaticaPlyCS.cs" />
+    <Compile Include="com.compi2.usac.analizadorPlyCS\RecorridoPlyCS.cs" />
+    <Compile Include="com.compi2.usac.analizadorPlyCS\SintacticoPlyCS.cs" />
     <Compile Include="com.compi2.usac.analizadorUSQL\GramaticaUSQL.cs" />
     <Compile Include="com.compi2.usac.analizadorUSQL\RecorridoUSQL.cs" />
     <Compile Include="com.compi2.usac.analizadorUSQL\SintacticoUSQL.cs" />

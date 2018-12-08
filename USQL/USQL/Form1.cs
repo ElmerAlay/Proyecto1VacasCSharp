@@ -11,7 +11,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Runtime.InteropServices;
 using USQL.com.compi2.usac.analizador;
-using USQL.com.compi2.usac.socket;
+using USQL.com.compi2.usac.analizadorPlyCS;
 
 namespace USQL
 {
@@ -40,7 +40,8 @@ namespace USQL
 
         private void btn_analizar_Click(object sender, EventArgs e)
         {
-            bool resultado = SintacticoUSQL.analizar(rtb_entrada.Text);
+            //bool resultado = SintacticoUSQL.analizar(rtb_entrada.Text);
+            bool resultado = SintacticoPlyCS.analizar(rtb_entrada.Text);
             if (resultado)
             {
                 rtb_consola.Text = "Correcto";
