@@ -162,23 +162,23 @@ Module MyParser
             Select Case .Parent.TableIndex                        
                 Case ProductionIndex.S                 
                     ' <S> ::= <ERROR_PAQ>
-                    MsgBox(.Item(0).Data.cadena & vbCrLf &
-                               .Item(0).Data.nombre)
+                    'MsgBox(.Item(0).Data.cadena & vbCrLf &
+                    '           .Item(0).Data.nombre)
                     Datos.datos = .Item(0).Data.cadena & vbCrLf & .Item(0).Data.nombre
                 Case ProductionIndex.S2                 
                     ' <S> ::= <REPORTE_REC>
-                    MsgBox(.Item(0).Data.cadena & vbCrLf &
-                               .Item(0).Data.nombre)
+                    'MsgBox(.Item(0).Data.cadena & vbCrLf &
+                    '           .Item(0).Data.nombre)
                     Datos.datos = .Item(0).Data.cadena & vbCrLf & .Item(0).Data.nombre
                 Case ProductionIndex.S3                 
                     ' <S> ::= <USQL_REC>
-                    MsgBox(.Item(0).Data.cadena & vbCrLf &
-                               .Item(0).Data.nombre)
+                    'MsgBox(.Item(0).Data.cadena & vbCrLf &
+                    '           .Item(0).Data.nombre)
                     Datos.datos = .Item(0).Data.cadena & vbCrLf & .Item(0).Data.nombre
                 Case ProductionIndex.S4              
                     ' <S> ::= <LOGIN_REC>
-                    MsgBox(.Item(0).Data.cadena & vbCrLf &
-                               .Item(0).Data.nombre)
+                    'MsgBox(.Item(0).Data.cadena & vbCrLf &
+                    '           .Item(0).Data.nombre)
                     Datos.datos = .Item(0).Data.cadena & vbCrLf & .Item(0).Data.nombre
                 Case ProductionIndex.Error_paq_Lbracket_Paquete_Colon_Paq_error_Comma_Tipo_Colon_Comma_Msg_Colon_Cadena_Comma_Datos_Colon_Lbracket_Error_Colon_Cadena_Comma_Instruccion_Colon_Cadena_Comma_Col_Colon_Numero_Comma_Fila_Colon_Numero_Rbracket_Rbracket                 
                     ' <ERROR_PAQ> ::= '[' paquete ':' 'paq_error' ',' tipo ':' <TIPO> ',' msg ':' cadena ',' datos ':' '[' error ':' cadena ',' instruccion ':' cadena ',' col ':' numero ',' fila ':' numero ']' ']' 

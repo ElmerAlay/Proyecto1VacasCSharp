@@ -36,10 +36,17 @@ Public Class Form1
         If cliente.Connected = True Then
             If leer_escribir.DataAvailable = True Then
                 ReDim bytes(cliente.ReceiveBufferSize)
-                'ReDim bytes(10000)
-                leer_escribir.Read(bytes, 0, bytes.Length)
-                'leer_escribir.Read(bytes, 0, 10000)
-                cadena = Encoding.ASCII.GetString(bytes, 0, bytes.Length)
+
+                Dim array_size As Integer = 0
+
+                array_size = leer_escribir.Read(bytes, 0, bytes.Length)
+                Array.Resize(bytes, array_size)
+                Dim r As String = Encoding.Default.GetString(bytes)
+
+                'leer_escribir.Read(bytes, 0, bytes.Length)
+                'cadena = Encoding.ASCII.GetString(bytes, 0, bytes.Length)
+
+                cadena = r
 
                 If cadena(0) = "U" And cadena(1) = "." Then
                     usuarios.Text = cadena

@@ -177,12 +177,12 @@ namespace USQL
                         //cadena = Encoding.ASCII.GetString(bytes) + "\n";
                         
                        
-                        cadena = "[" + Environment.NewLine + 
-                                    "paquete: usql," + Environment.NewLine + 
-                                    "datos:" + Environment.NewLine +
-                                    "[" + Environment.NewLine +
-                                        "[ \"" + r + "\"]" + Environment.NewLine + //"select * from usuarios" 
-                                    "]" + Environment.NewLine +
+                        cadena = "[" + 
+                                    "paquete: usql," + 
+                                    "datos:" +
+                                    "[" +
+                                        "[ \"" + r + "\"]" + //"select * from usuarios" 
+                                    "]" +
                                 "]";
                     }
 
