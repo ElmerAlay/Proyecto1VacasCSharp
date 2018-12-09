@@ -17,7 +17,7 @@ namespace USQL.com.compi2.usac.analizadorPlyCS
             RegexBasedTerminal numero = new RegexBasedTerminal("numero", "[0-9]+");
             IdentifierTerminal id = new IdentifierTerminal("id");
             StringLiteral cadenaSinComillas = TerminalFactory.CreateCSharpString("cadenaSinComillas");
-            StringLiteral cadena = new StringLiteral("cadena", "\"");
+            StringLiteral cadena = new StringLiteral("cadenaSinComillas", "\"");
             #endregion
 
             #region Terminales
