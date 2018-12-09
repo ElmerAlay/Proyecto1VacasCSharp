@@ -1,0 +1,32 @@
+"Case Sensitive" = False
+"START SYMBOL"   = <S>
+                 
+!Expresiones Regulares
+{String Char} = {Printable} - ["\] 
+cadena = '"' ( {String Char} | '\' {Printable} ) * '"' 
+numero = {Digit}+
+     
+!Gramatica
+<S> ::= <ERROR_PAQ>
+     |  <REPORTE_REC>
+     |  <USQL_REC>
+     |  <LOGIN_REC>
+     
+<ERROR_PAQ> ::= '[' 'paquete' ':' 'paq_error' ',' 'tipo' ':' <TIPO> ',' 'msg' ':' cadena ',' 'datos' ':' '[' 'error' ':' cadena ',' 'instruccion' ':' cadena ',' 'col' ':' numero ',' 'fila' ':' numero ']' ']'
+
+<TIPO>  ::= 'lenguaje'
+         |  'otro'
+
+<REPORTE_REC> ::= '[' 'paquete' ':' 'reporte' ',' 'datos' ':' cadena ']'
+
+<USQL_REC>  ::= '[' 'paquete' ':' 'usql' ',' 'datos' ':' '[' <LCADS> ']' ']'
+
+<LCADS> ::= <LCADS> '[' cadena ']'
+         |  '[' cadena ']'
+
+<LOGIN_REC> ::= '[' 'validar' ':' numero ',' 'datos' ':' cadena ']' 
+
+
+
+
+
