@@ -36,13 +36,18 @@ Public Class Form1
         If cliente.Connected = True Then
             If leer_escribir.DataAvailable = True Then
                 ReDim bytes(cliente.ReceiveBufferSize)
+                'ReDim bytes(10000)
                 leer_escribir.Read(bytes, 0, bytes.Length)
+                'leer_escribir.Read(bytes, 0, 10000)
                 cadena = Encoding.ASCII.GetString(bytes, 0, bytes.Length)
 
                 If cadena(0) = "U" And cadena(1) = "." Then
                     usuarios.Text = cadena
                 Else
                     conversacion.Text &= cadena
+                    MyParser.Setup()
+                    MyParser.Parse(New StringReader(cadena))
+                    MsgBox(Datos.datos)
                 End If
             End If
 
@@ -52,6 +57,7 @@ Public Class Form1
             conversacion.Text &= "PERDIDA LA CONEXION CON SERVIDOR"
             conversacion.SendToBack()
         End If
+        
     End Sub
 
     Private Sub btnenviar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnenviar.Click

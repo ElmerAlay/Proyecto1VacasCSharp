@@ -24,9 +24,9 @@ namespace USQL
         private TcpClient cliente = null;  //cliente conectado(aceptamos la solicitud y asignamos el tcpclient)
         private NetworkStream leer_escribir = null; //metodo para enviar y recibir informacion desde cliente
 
-        private Byte[] bytes;   // donde almacenamos lo recibido o lo que vamos a enviar
+        private Byte[] bytes;// = new Byte[10000];   // donde almacenamos lo recibido o lo que vamos a enviar
         private String cadena = ""; //almacenamos la info antes de codificar o bien despues para tratarla
-        private static int max_connect = 10; //maximas conexiones permitidas
+        private static int max_connect = 100; //maximas conexiones permitidas
         private int conectados = 0; //usuarios conectados
         private IntPtr[] idclientes = new IntPtr[max_connect]; //array de identificadores de clientes
         private TcpClient[] tcpclientes= new TcpClient[max_connect]; //array de tcpclient de los clientes
@@ -158,8 +158,15 @@ namespace USQL
 
                 if (leer_escribir.DataAvailable == true)
                 {
-                    bytes = new byte[cliente.ReceiveBufferSize];
-                    leer_escribir.Read(bytes, 0, bytes.Length);
+                    //bytes = new byte[cliente.ReceiveBufferSize];
+                    bytes = new byte[10000];
+                    int array_size = 0;
+
+                    array_size = leer_escribir.Read(bytes, 0, bytes.Length);
+                    Array.Resize(ref bytes, array_size);
+                    String r = Encoding.Default.GetString(bytes);
+
+                    //leer_escribir.Read(bytes, 0, 10000);
 
                     if (String.Compare(Encoding.ASCII.GetString(bytes), "hola") == 0)
                     {
@@ -167,7 +174,16 @@ namespace USQL
                     }
                     else
                     {
-                        cadena = Encoding.ASCII.GetString(bytes) + "\n";
+                        //cadena = Encoding.ASCII.GetString(bytes) + "\n";
+                        
+                       
+                        cadena = "[" + Environment.NewLine + 
+                                    "paquete: usql," + Environment.NewLine + 
+                                    "datos:" + Environment.NewLine +
+                                    "[" + Environment.NewLine +
+                                        "[ \"" + r + "\"]" + Environment.NewLine + //"select * from usuarios" 
+                                    "]" + Environment.NewLine +
+                                "]";
                     }
 
                     for (j = 0; j <= posicion - 1; j++)
