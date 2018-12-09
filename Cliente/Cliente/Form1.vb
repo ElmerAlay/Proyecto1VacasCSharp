@@ -70,7 +70,36 @@ Public Class Form1
     Private Sub btnenviar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnenviar.Click
         If txtenviar.Text <> "" Then
 
-            cadena = txtenviar.Text
+            cadena = "usql "
+            cadena &= txtenviar.Text
+            bytes = Encoding.ASCII.GetBytes(cadena)
+            leer_escribir.Write(bytes, 0, bytes.Length)
+
+            cadena = ""
+            bytes = Nothing
+
+        End If
+    End Sub
+
+    Private Sub btn_reporte_Click(sender As Object, e As EventArgs) Handles btn_reporte.Click
+        If rtb_reporte.Text <> "" Then
+
+            cadena = "report "
+            cadena &= rtb_reporte.Text
+            bytes = Encoding.ASCII.GetBytes(cadena)
+            leer_escribir.Write(bytes, 0, bytes.Length)
+
+            cadena = ""
+            bytes = Nothing
+
+        End If
+    End Sub
+
+    Private Sub btn_login_Click(sender As Object, e As EventArgs) Handles btn_login.Click
+        If rtb_login.Text <> "" Then
+
+            cadena = "login "
+            cadena &= rtb_login.Text
             bytes = Encoding.ASCII.GetBytes(cadena)
             leer_escribir.Write(bytes, 0, bytes.Length)
 

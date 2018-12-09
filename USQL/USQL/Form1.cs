@@ -40,7 +40,6 @@ namespace USQL
 
         private void btn_analizar_Click(object sender, EventArgs e)
         {
-            //bool resultado = SintacticoUSQL.analizar(rtb_entrada.Text);
             bool resultado = SintacticoPlyCS.analizar(rtb_entrada.Text);
             if (resultado)
             {
@@ -158,7 +157,6 @@ namespace USQL
 
                 if (leer_escribir.DataAvailable == true)
                 {
-                    //bytes = new byte[cliente.ReceiveBufferSize];
                     bytes = new byte[10000];
                     int array_size = 0;
 
@@ -166,22 +164,36 @@ namespace USQL
                     Array.Resize(ref bytes, array_size);
                     String r = Encoding.Default.GetString(bytes);
 
-                    //leer_escribir.Read(bytes, 0, 10000);
-
-                    if (String.Compare(Encoding.ASCII.GetString(bytes), "hola") == 0)
+                    if (r.Contains("report "))
                     {
-                        cadena = "El mensaje se ha recibido sin errores\n";
+                        r = r.Replace("report ", "");
+                        cadena = "[" +
+	                                "paquete: reporte," +
+	                                "datos:" + "\"" + r + "\"" +
+                                 "]";
+
+                    }
+                    else if (r.Contains("login "))
+                    {
+                        r = r.Replace("login ", "");
+                        cadena = "[" +
+                                    "validar: 1500," +
+                                    "datos:" + "\"" + r + "\"" +
+                                "]";
+                    }
+                    else if (r.Contains("logout "))
+                    {
+                        r = r.Replace("logout "," ");
+                        cadena = "cadena finalizada";
                     }
                     else
                     {
-                        //cadena = Encoding.ASCII.GetString(bytes) + "\n";
-                        
-                       
+                        r = r.Replace("usql ", "");
                         cadena = "[" + 
                                     "paquete: usql," + 
                                     "datos:" +
                                     "[" +
-                                        "[ \"" + r + "\"]" + //"select * from usuarios" 
+                                        "[ \"" + r + "\"]" +
                                     "]" +
                                 "]";
                     }

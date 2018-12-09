@@ -29,6 +29,10 @@ Partial Class Form1
         Me.btnenviar = New System.Windows.Forms.Button()
         Me.txtenviar = New System.Windows.Forms.RichTextBox()
         Me.conectar = New System.Windows.Forms.CheckBox()
+        Me.rtb_reporte = New System.Windows.Forms.RichTextBox()
+        Me.rtb_login = New System.Windows.Forms.RichTextBox()
+        Me.btn_reporte = New System.Windows.Forms.Button()
+        Me.btn_login = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'conversacion
@@ -52,7 +56,7 @@ Partial Class Form1
         '
         'btnenviar
         '
-        Me.btnenviar.Location = New System.Drawing.Point(457, 227)
+        Me.btnenviar.Location = New System.Drawing.Point(457, 218)
         Me.btnenviar.Name = "btnenviar"
         Me.btnenviar.Size = New System.Drawing.Size(75, 23)
         Me.btnenviar.TabIndex = 2
@@ -77,11 +81,49 @@ Partial Class Form1
         Me.conectar.Text = "Conectar?"
         Me.conectar.UseVisualStyleBackColor = True
         '
+        'rtb_reporte
+        '
+        Me.rtb_reporte.Location = New System.Drawing.Point(13, 279)
+        Me.rtb_reporte.Name = "rtb_reporte"
+        Me.rtb_reporte.Size = New System.Drawing.Size(438, 84)
+        Me.rtb_reporte.TabIndex = 5
+        Me.rtb_reporte.Text = ""
+        '
+        'rtb_login
+        '
+        Me.rtb_login.Location = New System.Drawing.Point(13, 369)
+        Me.rtb_login.Name = "rtb_login"
+        Me.rtb_login.Size = New System.Drawing.Size(438, 70)
+        Me.rtb_login.TabIndex = 6
+        Me.rtb_login.Text = ""
+        '
+        'btn_reporte
+        '
+        Me.btn_reporte.Location = New System.Drawing.Point(457, 339)
+        Me.btn_reporte.Name = "btn_reporte"
+        Me.btn_reporte.Size = New System.Drawing.Size(75, 23)
+        Me.btn_reporte.TabIndex = 7
+        Me.btn_reporte.Text = "Reporte"
+        Me.btn_reporte.UseVisualStyleBackColor = True
+        '
+        'btn_login
+        '
+        Me.btn_login.Location = New System.Drawing.Point(458, 415)
+        Me.btn_login.Name = "btn_login"
+        Me.btn_login.Size = New System.Drawing.Size(75, 23)
+        Me.btn_login.TabIndex = 8
+        Me.btn_login.Text = "Login"
+        Me.btn_login.UseVisualStyleBackColor = True
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(543, 282)
+        Me.ClientSize = New System.Drawing.Size(542, 451)
+        Me.Controls.Add(Me.btn_login)
+        Me.Controls.Add(Me.btn_reporte)
+        Me.Controls.Add(Me.rtb_login)
+        Me.Controls.Add(Me.rtb_reporte)
         Me.Controls.Add(Me.conectar)
         Me.Controls.Add(Me.txtenviar)
         Me.Controls.Add(Me.btnenviar)
@@ -99,5 +141,9 @@ Partial Class Form1
     Friend WithEvents btnenviar As System.Windows.Forms.Button
     Friend WithEvents txtenviar As System.Windows.Forms.RichTextBox
     Friend WithEvents conectar As System.Windows.Forms.CheckBox
+    Friend WithEvents rtb_reporte As System.Windows.Forms.RichTextBox
+    Friend WithEvents rtb_login As System.Windows.Forms.RichTextBox
+    Friend WithEvents btn_reporte As System.Windows.Forms.Button
+    Friend WithEvents btn_login As System.Windows.Forms.Button
 
 End Class
