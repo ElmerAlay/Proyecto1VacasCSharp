@@ -5,14 +5,24 @@ using System.Text;
 using System.Threading.Tasks;
 using Irony.Parsing;
 using System.Windows.Forms;
+using USQL.com.compi2.usac.controlArchivos;
 
 namespace USQL.com.compi2.usac.analizadorXML
 {
     class RecorridoXML
     {
-        public static void resultado(ParseTreeNode root)
+        private static string result=""; 
+
+        public static String valores()
+        {
+            return result;
+        }
+
+        public static String resultado(ParseTreeNode root)
         {
             MessageBox.Show(expresion(root.ChildNodes.ElementAt(0)));
+            result = expresion(root.ChildNodes.ElementAt(0));
+            return result;       
         }
 
         private static String expresion(ParseTreeNode root)
@@ -26,6 +36,9 @@ namespace USQL.com.compi2.usac.analizadorXML
                         String.Compare(root.ToString(), "OBJS") == 0)
                     {
                         return expresion(root.ChildNodes.ElementAt(0));
+                    }
+                        else if(String.Compare(root.ToString(), "ROW") == 0){
+                        return "fila_tabla:" + Environment.NewLine + expresion(root.ChildNodes.ElementAt(0));
                     }
                     else if(String.Compare(root.ToString(), "ROW") == 0){
                         return "fila_tabla:" + Environment.NewLine + expresion(root.ChildNodes.ElementAt(0));
@@ -63,15 +76,17 @@ namespace USQL.com.compi2.usac.analizadorXML
                 case 3:
                     if (String.Compare(root.ToString(), "BD") == 0)
                     {
-                        return root.ChildNodes.ElementAt(0).ToString().Replace(" (cadenaNormal)", "") + "," +
+                        return
+                            root.ChildNodes.ElementAt(0).ToString().Replace(" (cadenaNormal)", "") + "," +
                             root.ChildNodes.ElementAt(1).ToString().Replace(" (cadenaNormal)", "") + "," +
                             root.ChildNodes.ElementAt(2).ToString().Replace(" (cadenaNormal)", "") + Environment.NewLine;
                     }
                     else if (String.Compare(root.ToString(), "TABLE") == 0)
                     {
-                        String val = root.ChildNodes.ElementAt(0).ToString().Replace(" (cadenaNormal)", "") + Environment.NewLine +
+                        String val = "-" + Environment.NewLine + 
+                            root.ChildNodes.ElementAt(0).ToString().Replace(" (cadenaNormal)", "") + Environment.NewLine +
                             root.ChildNodes.ElementAt(1).ToString().Replace(" (cadenaNormal)", "") + Environment.NewLine;
-                        return val + expresion(root.ChildNodes.ElementAt(2));
+                        return val + expresion(root.ChildNodes.ElementAt(2)) + "-" + Environment.NewLine;
 
                     }
                     else if (String.Compare(root.ToString(), "CAMPO") == 0)

@@ -57,6 +57,8 @@
     <Compile Include="com.compi2.usac.analizadorXML\GramaticaXML.cs" />
     <Compile Include="com.compi2.usac.analizadorXML\RecorridoXML.cs" />
     <Compile Include="com.compi2.usac.analizadorXML\SintacticoXML.cs" />
+    <Compile Include="com.compi2.usac.controlArchivos\ControlElementosArchivo.cs" />
+    <Compile Include="com.compi2.usac.controlArchivos\LecturaArchivos.cs" />
     <Compile Include="com.compi2.usac.controlDot\ControlDot.cs" />
     <Compile Include="com.compi2.usac.socket\Servidor.cs" />
     <Compile Include="Form1.cs">
