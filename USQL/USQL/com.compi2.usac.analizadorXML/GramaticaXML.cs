@@ -60,6 +60,9 @@ namespace USQL.com.compi2.usac.analizadorXML
             var attrO = ToTerm("<attr>");
             var attrC = ToTerm("</attr>");
 
+            var userO = ToTerm("<user>");
+            var userC = ToTerm("</user>");
+
             var gt = ToTerm("<");
             var lt = ToTerm(">");
             var diagonal = ToTerm("/");
@@ -91,12 +94,9 @@ namespace USQL.com.compi2.usac.analizadorXML
                 | BD;
 
             BD.Rule = dbO + 
-                        nombreO + 
-                            cadena + 
-                        nombreC +
-                        pathO +
-                            cadena +
-                        pathC +
+                        nombreO + cadena + nombreC +
+                        pathO + cadena + pathC +
+                        userO + cadena + userC +
                       dbC;
 
             REGISTROS.Rule = REGISTROS + REGISTRO
@@ -149,7 +149,7 @@ namespace USQL.com.compi2.usac.analizadorXML
             this.Root = S;
             this.MarkPunctuation("<db>", "</db>", "<nombre>", "</nombre>",
                 "<path>", "</path>", "<procedure>", "</procedure>", "<object>", "</object>",
-                "<tabla>", "</tabla>", "<rows>", "</rows>", "</int>", "</text>",
+                "<tabla>", "</tabla>", "<rows>", "</rows>", "</int>", "</text>", "<user>", "</user>",
                 "</bool>", "<", ">", "/", "<params>", "</params>", "<src>", "</src>", "<attr>", "</attr>");
             #endregion
         }
