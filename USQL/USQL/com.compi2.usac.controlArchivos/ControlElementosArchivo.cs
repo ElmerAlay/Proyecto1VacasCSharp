@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using USQL.com.compi2.usac.analizadorXML;
 using System.Windows.Forms;
+using System.IO;
+using System.Collections;
 
 namespace USQL.com.compi2.usac.controlArchivos
 {
@@ -36,7 +38,7 @@ namespace USQL.com.compi2.usac.controlArchivos
                 {
                     ruta = ControlElementosArchivo.separarCadena(lineas[i]);
 
-                    MessageBox.Show(ruta[0] + "=" + db + " " + ruta[2].Replace("\r","") + "=" + user);
+                    //MessageBox.Show(ruta[0] + "=" + db + " " + ruta[2].Replace("\r","") + "=" + user);
                     if (String.Compare(ruta[0], db) == 0 && String.Compare(ruta[2].Replace("\r", ""), user) == 0)
                     {
                         MessageBox.Show("Si existe!!!");
@@ -56,12 +58,23 @@ namespace USQL.com.compi2.usac.controlArchivos
         {
             if (SintacticoXML.analizar(LecturaArchivos.leerDB(cadena)))
             {
-                String[] tablas = cadena.Split('-');
-                for (int i = 0; i < tablas.Length; i++)
+                String resultado = RecorridoXML.valores();
+                String[] tablas = resultado.Split('-');
+
+                for (int i = 0; i < tablas.Length - 1; i++)
                 {
-                    if (!tablas.Contains("path"))
+                    if (!tablas[i].Contains("path"))
                     {
-                        MessageBox.Show(tablas[i]);
+                        String[] valores = tablas[i].Split('\n');
+                        String nombre = valores[1].Replace("\r","");
+                        String ruta = valores[2].Replace("\r", "");
+                        String campos = ""; 
+
+                        for (int j = 3; j < valores.Length - 1; j++)
+                        {
+                            campos += valores[j].Replace("\r", "") + ";";
+                        }
+                           MessageBox.Show(nombre + Environment.NewLine + ruta + Environment.NewLine + campos);
                     }
                 }
             }

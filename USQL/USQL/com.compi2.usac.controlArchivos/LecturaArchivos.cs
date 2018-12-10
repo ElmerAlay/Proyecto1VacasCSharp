@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System;
 using System.IO;
 using System.Collections;
 using System.Windows.Forms;
@@ -53,7 +52,7 @@ namespace USQL.com.compi2.usac.controlArchivos
             String respuesta = "";
             foreach (string sOutput in arrText)
             {
-                MessageBox.Show(sOutput);
+                //MessageBox.Show(sOutput);
                 respuesta += sOutput + Environment.NewLine;
             }
                 

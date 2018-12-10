@@ -20,7 +20,7 @@ namespace USQL.com.compi2.usac.analizadorXML
 
         public static String resultado(ParseTreeNode root)
         {
-            MessageBox.Show(expresion(root.ChildNodes.ElementAt(0)));
+            //MessageBox.Show(expresion(root.ChildNodes.ElementAt(0)));
             result = expresion(root.ChildNodes.ElementAt(0));
             return result;       
         }
