@@ -38,18 +38,25 @@ namespace USQL.com.compi2.usac.analizadorXML
                         return expresion(root.ChildNodes.ElementAt(0));
                     }
                         else if(String.Compare(root.ToString(), "ROW") == 0){
-                        return "fila_tabla:" + Environment.NewLine + expresion(root.ChildNodes.ElementAt(0));
+                        return "-" + Environment.NewLine + expresion(root.ChildNodes.ElementAt(0));
                     }
                     else if(String.Compare(root.ToString(), "ROW") == 0){
-                        return "fila_tabla:" + Environment.NewLine + expresion(root.ChildNodes.ElementAt(0));
+                        return "-" + Environment.NewLine + expresion(root.ChildNodes.ElementAt(0)) + Environment.NewLine;
                     }
                     else
                     {
-                        if (String.Compare(root.ToString(), "PROCEDURE") == 0 || String.Compare(root.ToString(), "OBJECT") == 0)
+                        if (String.Compare(root.ToString(), "PROCEDURE") == 0)
                         {
-                            return "path:" + root.ChildNodes.ElementAt(0).ToString().Replace(" (cadenaNormal)", "") + Environment.NewLine;
+                            return "procedure:" + root.ChildNodes.ElementAt(0).ToString().Replace(" (cadenaNormal)", "") + Environment.NewLine;
                         }
-                        return root.ChildNodes.ElementAt(0).ToString().Replace(" (cadenaNormal)", "");
+                        else if (String.Compare(root.ToString(), "OBJECT") == 0)
+                        {
+                            return "object:" + root.ChildNodes.ElementAt(0).ToString().Replace(" (cadenaNormal)", "") + Environment.NewLine;
+                        }
+                        else
+                        {
+                            return root.ChildNodes.ElementAt(0).ToString().Replace(" (cadenaNormal)", "");
+                        }
                     }
                 case 2:
                     if (String.Compare(root.ToString(), "BDS") == 0 || String.Compare(root.ToString(), "REGISTROS") == 0 ||
