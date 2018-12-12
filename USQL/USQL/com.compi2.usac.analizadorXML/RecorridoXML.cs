@@ -32,16 +32,14 @@ namespace USQL.com.compi2.usac.analizadorXML
                 case 1: //Nodos hojas
                     if (String.Compare(root.ToString(), "BDS") == 0 || String.Compare(root.ToString(), "REGISTROS") == 0 ||
                         String.Compare(root.ToString(), "REGISTRO") == 0 || String.Compare(root.ToString(), "CAMPOS") == 0 ||
-                        String.Compare(root.ToString(), "ROWS") == 0 || String.Compare(root.ToString(), "PROCS") == 0 ||
-                        String.Compare(root.ToString(), "OBJS") == 0)
+                        String.Compare(root.ToString(), "ROWS") == 0)
                     {
                         return expresion(root.ChildNodes.ElementAt(0));
                     }
-                        else if(String.Compare(root.ToString(), "ROW") == 0){
+                    else if (String.Compare(root.ToString(), "ROW") == 0 || String.Compare(root.ToString(), "PROCS") == 0 ||
+                        String.Compare(root.ToString(), "OBJS") == 0)
+                    {
                         return "-" + Environment.NewLine + expresion(root.ChildNodes.ElementAt(0));
-                    }
-                    else if(String.Compare(root.ToString(), "ROW") == 0){
-                        return "-" + Environment.NewLine + expresion(root.ChildNodes.ElementAt(0)) + Environment.NewLine;
                     }
                     else
                     {
@@ -60,10 +58,13 @@ namespace USQL.com.compi2.usac.analizadorXML
                     }
                 case 2:
                     if (String.Compare(root.ToString(), "BDS") == 0 || String.Compare(root.ToString(), "REGISTROS") == 0 ||
-                        String.Compare(root.ToString(), "CAMPOS") == 0 || String.Compare(root.ToString(), "ROWS") == 0 ||
-                        String.Compare(root.ToString(), "PROCS") == 0 || String.Compare(root.ToString(), "OBJS") == 0)
+                        String.Compare(root.ToString(), "CAMPOS") == 0 || String.Compare(root.ToString(), "ROWS") == 0)
                     {
                         return expresion(root.ChildNodes.ElementAt(0)) + expresion(root.ChildNodes.ElementAt(1));
+                    }
+                    else if (String.Compare(root.ToString(), "PROCS") == 0 || String.Compare(root.ToString(), "OBJS") == 0)
+                    {
+                        return expresion(root.ChildNodes.ElementAt(0)) + "-" + Environment.NewLine + expresion(root.ChildNodes.ElementAt(1));
                     }
                     else if (String.Compare(root.ToString(), "CAMPO") == 0)
                     {
@@ -74,10 +75,10 @@ namespace USQL.com.compi2.usac.analizadorXML
                         return val + root.ChildNodes.ElementAt(1).ToString().Replace(" (cadenaNormal)", "") + Environment.NewLine;
                     }
                     else if (String.Compare(root.ToString(), "OBJ") == 0)
-                    { 
+                    {
                         return root.ChildNodes.ElementAt(0).ToString().Replace(" (cadenaNormal)", "") + Environment.NewLine +
-                            "campos: " + Environment.NewLine +
-                            expresion(root.ChildNodes.ElementAt(1));
+                            "°" + Environment.NewLine +
+                            expresion(root.ChildNodes.ElementAt(1)) + "°" + Environment.NewLine;
                     }
                     return "";
                 case 3:
@@ -105,8 +106,8 @@ namespace USQL.com.compi2.usac.analizadorXML
                     else if (String.Compare(root.ToString(), "PROC") == 0)
                     {
                         return root.ChildNodes.ElementAt(0).ToString().Replace(" (cadenaNormal)", "") + Environment.NewLine +
-                            "parametros: " + Environment.NewLine +
-                            expresion(root.ChildNodes.ElementAt(1)) +
+                            "°" + Environment.NewLine +
+                            expresion(root.ChildNodes.ElementAt(1)) + "°" + Environment.NewLine + 
                             root.ChildNodes.ElementAt(2).ToString().Replace(" (cadenaNormal)", "") + Environment.NewLine;
                     }
                     

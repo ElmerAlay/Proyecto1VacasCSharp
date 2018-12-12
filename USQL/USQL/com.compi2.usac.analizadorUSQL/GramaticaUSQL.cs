@@ -16,6 +16,8 @@ namespace USQL.com.compi2.usac.analizador
             #region EXPRESIONES REGULARES
             RegexBasedTerminal numero = new RegexBasedTerminal("numero", "[0-9]+");
             IdentifierTerminal id = new IdentifierTerminal("id");
+            StringLiteral cadenaNormal = TerminalFactory.CreateCSharpString("cadenaNormal");
+            StringLiteral cadena = new StringLiteral("cadenaNormal", "\"");
             #endregion
 
             #region TERMINALES
@@ -38,14 +40,14 @@ namespace USQL.com.compi2.usac.analizador
                 | E + div + E
                 | ToTerm("(") + E + ToTerm(")")
                 | numero
-                | id;
+                | id
+                | cadena;
             #endregion
 
             #region PREFERENCIAS
             this.Root = S;
             this.RegisterOperators(20, Associativity.Left, plus, minus);
             this.RegisterOperators(30, Associativity.Left, mult, div);
-            this.MarkPunctuation("(", ")");
             #endregion
         }
     }

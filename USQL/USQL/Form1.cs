@@ -42,19 +42,19 @@ namespace USQL
 
         private void btn_analizar_Click(object sender, EventArgs e)
         {
-            bool resultado = SintacticoXML.analizar(rtb_entrada.Text);
+            //bool resultado = SintacticoXML.analizar(rtb_entrada.Text);
             //bool resultado = SintacticoXML.analizar();
 
             ControlElementosArchivo.getDB("DB1", "user1");
 
-            if (resultado)
-            {
-                rtb_consola.Text = "Correcto";
-            }
-            else
-            {
-                rtb_consola.Text = "Incorrecto";
-            }
+            //if (resultado)
+            //{
+            //    rtb_consola.Text = "Correcto";
+            //}
+            //else
+            //{
+            //    rtb_consola.Text = "Incorrecto";
+            //}
         }
 
         private void escucha_CheckedChanged(object sender, EventArgs e)
