@@ -13,49 +13,93 @@ namespace USQL.com.compi2.usac.controlArchivos
 {
     class ControlElementosArchivo
     {
-        private static String[] lineas;
-        private static String[] ruta;
+        private String[] lineas;
+        private String[] ruta;
+        private int contador;
 
-        public static String[] separarLineas(String cadena)
+        public ControlElementosArchivo()
+        {
+            this.contador = 0;
+        }
+
+        public  String[] separarLineas(String cadena)
         {
             String[] valores = cadena.Split('\n');
             return valores;
         }
 
-        public static String[] separarCadena(String cadena)
+        public  String[] separarCadena(String cadena)
         {
             String[] valores = cadena.Split(',');
             return valores;
         }
 
-        public static String getDB(String db, String user)
+        public void getDBs()
         {
+            Nodo raiz = new Nodo("Maestro");
+            raiz.setValor("maestro");
+            raiz.setIdNodo(contador++);
+
+            foreach (Object obj in getDB())
+            {
+                raiz.addHijos((Nodo)obj);
+            }
+
+            MessageBox.Show(raiz.getHijos().Count.ToString());
+        }
+
+        public ArrayList getDB()
+        {
+            ArrayList databases = new ArrayList();
+
             if (SintacticoXML.analizar(LecturaArchivos.leerMaestro()))
             {
-                lineas = ControlElementosArchivo.separarLineas(RecorridoXML.valores());
+                lineas = separarLineas(RecorridoXML.valores());
                 for (int i = 0; i < lineas.Length - 1; i++)
                 {
-                    ruta = ControlElementosArchivo.separarCadena(lineas[i]);
+                    ruta = separarCadena(lineas[i]);
 
-                    if (String.Compare(ruta[0], db) == 0 && String.Compare(ruta[2].Replace("\r", ""), user) == 0)
+                    Nodo dataBase = new Nodo("base de datos");
+                    dataBase.setValor(ruta[0]);
+                    dataBase.setIdNodo(contador++);
+
+                    foreach (Object obj in getTable(ruta[1]))
                     {
-                        MessageBox.Show("Si existe!!!");
-                        
-                        //MessageBox.Show(getTable(ruta[1]).Count.ToString());
-                        //MessageBox.Show(getProcedures(ruta[1]).Count.ToString());
-                        getObjects(ruta[1]);
+                        Nodo aux = new Nodo("tabla");
+                        aux.setValor(obj);
+                        aux.setIdNodo(contador++);
+                        dataBase.addHijos(aux);
                     }
-                        
+
+                    foreach (Object obj in getProcedures(ruta[1]))
+                    {
+                        Nodo aux = new Nodo("procedimiento");
+                        aux.setValor(obj);
+                        aux.setIdNodo(contador++);
+                        dataBase.addHijos(aux);
+                    }
+
+                    foreach (Object obj in getObjects(ruta[1]))
+                    {
+                        Nodo aux = new Nodo("objeto");
+                        aux.setValor(obj);
+                        aux.setIdNodo(contador++);
+                        dataBase.addHijos(aux);
+                    }
+
+                    databases.Add(dataBase);
                 }
+
+                return databases;
             }
             else
             {
-                return "Error en el archivo";
+                MessageBox.Show("Error al leer el archivo maestro de la base de datos");
+                return null;
             }
-            return "";
         }
 
-        private static ArrayList getTable(String cadena)
+        private ArrayList getTable(String cadena)
         {
             ArrayList tables = new ArrayList();
 
@@ -96,7 +140,7 @@ namespace USQL.com.compi2.usac.controlArchivos
             }
         }
 
-        private static ArrayList getRows(String ruta)
+        private ArrayList getRows(String ruta)
         {
             ArrayList result = new ArrayList();
 
@@ -135,7 +179,7 @@ namespace USQL.com.compi2.usac.controlArchivos
             }
         }
 
-        private static ArrayList getProcedures(String ruta)
+        private ArrayList getProcedures(String ruta)
         {
             ArrayList procedures = new ArrayList();
 
@@ -173,7 +217,7 @@ namespace USQL.com.compi2.usac.controlArchivos
             }
         }
 
-        private static ArrayList getProcedure(String ruta)
+        private ArrayList getProcedure(String ruta)
         {
             ArrayList procedures = new ArrayList();
 
@@ -215,7 +259,7 @@ namespace USQL.com.compi2.usac.controlArchivos
             }
         }
 
-        private static ArrayList getObjects(String ruta)
+        private ArrayList getObjects(String ruta)
         {
             ArrayList objects = new ArrayList();
 
@@ -257,7 +301,7 @@ namespace USQL.com.compi2.usac.controlArchivos
             }
         }
 
-        private static ArrayList getObject(String ruta)
+        private ArrayList getObject(String ruta)
         {
             ArrayList objects = new ArrayList();
 

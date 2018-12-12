@@ -57,6 +57,7 @@
     <Compile Include="com.compi2.usac.analizadorXML\GramaticaXML.cs" />
     <Compile Include="com.compi2.usac.analizadorXML\RecorridoXML.cs" />
     <Compile Include="com.compi2.usac.analizadorXML\SintacticoXML.cs" />
+    <Compile Include="com.compi2.usac.arbolBD\Nodo.cs" />
     <Compile Include="com.compi2.usac.arbolBD\Objeto.cs" />
     <Compile Include="com.compi2.usac.arbolBD\Procedimiento.cs" />
     <Compile Include="com.compi2.usac.arbolBD\Tabla.cs" />

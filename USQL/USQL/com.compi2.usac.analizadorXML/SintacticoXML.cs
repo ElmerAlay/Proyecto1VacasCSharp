@@ -26,8 +26,8 @@ namespace USQL.com.compi2.usac.analizadorXML
                 return false;
             }
 
-            generarImagen(raiz);
-            MessageBox.Show("Imagen generada");
+            //generarImagen(raiz);
+            //MessageBox.Show("Imagen generada");
             RecorridoXML.resultado(raiz);
 
             return true;

@@ -45,7 +45,8 @@ namespace USQL
             //bool resultado = SintacticoXML.analizar(rtb_entrada.Text);
             //bool resultado = SintacticoXML.analizar();
 
-            ControlElementosArchivo.getDB("DB1", "user1");
+            ControlElementosArchivo cs = new ControlElementosArchivo();
+            cs.getDBs();
 
             //if (resultado)
             //{
