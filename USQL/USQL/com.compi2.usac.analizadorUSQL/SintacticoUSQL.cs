@@ -28,10 +28,7 @@ namespace USQL.com.compi2.usac.analizador
                 return false;
             }
 
-            generarImagen(raiz);
-            MessageBox.Show("Imagen generada");
-            RecorridoUSQL.resultado(raiz);
-
+            RecorridoUSQL.arbolAST(raiz);
             return true;
         }
 
