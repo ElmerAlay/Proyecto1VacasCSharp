@@ -16,17 +16,7 @@ namespace USQL.com.compi2.usac.analizador
 
         public static void resultado(ParseTreeNode root)
         {
-            if (expresion(root.ChildNodes.ElementAt(0)) != 0.0)
-            {
-                MessageBox.Show("Respuesta " + expresion(root.ChildNodes.ElementAt(0)));
-                cadena = "";
-
-            }
-            else
-            {
-                MessageBox.Show("Error de tipo: " + Environment.NewLine + " No se pudieron operar los números con las sigientes cadenas: " + cadena);
-                cadena = "";
-            }
+            MessageBox.Show("Respuesta " + tree(root.ChildNodes.ElementAt(0)));
         }
 
         public static void arbolAST(ParseTreeNode root)
@@ -85,11 +75,32 @@ namespace USQL.com.compi2.usac.analizador
                         aux.addHijos(tree(root.ChildNodes.ElementAt(1)));
                         return aux;
                     }
+                    else if (String.Compare(root.ToString(), "E") == 0)
+                    {
+                        switch (root.ChildNodes.ElementAt(0).ToString().Replace(" (Key symbol)",""))
+                        {
+                            case "-": //-E
+                                Node aux = new Node("E");
+
+                                aux.addHijos(new Node("-"));
+                                aux.addHijos(tree(root.ChildNodes.ElementAt(1)));
+                                return aux;
+                            case "!": //!E
+                                Node aux1 = new Node("E");
+
+                                aux1.addHijos(new Node("!"));
+                                aux1.addHijos(tree(root.ChildNodes.ElementAt(1)));
+                                return aux1;
+                        }
+
+                        
+                    }
                     return null;
                 case 3: //Nodo binario
-                    switch (root.ChildNodes.ElementAt(1).ToString().Substring(0, 1))
+                    String operador = root.ChildNodes.ElementAt(1).ToString().Replace(" (Key symbol)","");
+                    switch (operador)
                     {
-                        case "+": //E+E
+                        case "+": //E + E
                             Node suma = new Node("E");
                             //suma.setIdNodo(contador++);
                             suma.addHijos(tree(root.ChildNodes.ElementAt(0)));
@@ -97,27 +108,83 @@ namespace USQL.com.compi2.usac.analizador
                             suma.addHijos(tree(root.ChildNodes.ElementAt(2)));
 
                             return suma;
-                        case "-": //E-E
+                        case "-": //E - E
                             Node resta = new Node("E");
                             resta.addHijos(tree(root.ChildNodes.ElementAt(0)));
                             resta.addHijos(new Node("-"));
                             resta.addHijos(tree(root.ChildNodes.ElementAt(2)));
 
                             return resta;
-                        case "*": //E+E
+                        case "*": //E * E
                             Node mult = new Node("E");
                             mult.addHijos(tree(root.ChildNodes.ElementAt(0)));
                             mult.addHijos(new Node("*"));
                             mult.addHijos(tree(root.ChildNodes.ElementAt(2)));
 
                             return mult;
-                        case "/": //E-E
+                        case "/": //E / E
                             Node div = new Node("E");
                             div.addHijos(tree(root.ChildNodes.ElementAt(0)));
                             div.addHijos(new Node("/"));
                             div.addHijos(tree(root.ChildNodes.ElementAt(2)));
 
                             return div;
+                        case ">": //E > E
+                            Node gt = new Node("E");
+                            gt.addHijos(tree(root.ChildNodes.ElementAt(0)));
+                            gt.addHijos(new Node(">"));
+                            gt.addHijos(tree(root.ChildNodes.ElementAt(2)));
+
+                            return gt;
+                        case "<": //E < E
+                            Node lt = new Node("E");
+                            lt.addHijos(tree(root.ChildNodes.ElementAt(0)));
+                            lt.addHijos(new Node("<"));
+                            lt.addHijos(tree(root.ChildNodes.ElementAt(2)));
+
+                            return lt;
+                        case ">=": //E >= E
+                            Node gte = new Node("E");
+                            gte.addHijos(tree(root.ChildNodes.ElementAt(0)));
+                            gte.addHijos(new Node(">="));
+                            gte.addHijos(tree(root.ChildNodes.ElementAt(2)));
+
+                            return gte;
+                        case "<=": //E <= E
+                            Node lte = new Node("E");
+                            lte.addHijos(tree(root.ChildNodes.ElementAt(0)));
+                            lte.addHijos(new Node("<="));
+                            lte.addHijos(tree(root.ChildNodes.ElementAt(2)));
+
+                            return lte;
+                        case "==": //E == E
+                            Node eq = new Node("E");
+                            eq.addHijos(tree(root.ChildNodes.ElementAt(0)));
+                            eq.addHijos(new Node("=="));
+                            eq.addHijos(tree(root.ChildNodes.ElementAt(2)));
+
+                            return eq;
+                        case "!=": //E != E
+                            Node neq = new Node("E");
+                            neq.addHijos(tree(root.ChildNodes.ElementAt(0)));
+                            neq.addHijos(new Node("!="));
+                            neq.addHijos(tree(root.ChildNodes.ElementAt(2)));
+
+                            return neq;
+                        case "&&": //E && E
+                            Node and = new Node("E");
+                            and.addHijos(tree(root.ChildNodes.ElementAt(0)));
+                            and.addHijos(new Node("&&"));
+                            and.addHijos(tree(root.ChildNodes.ElementAt(2)));
+
+                            return and;
+                        case "||": //E || E
+                            Node or = new Node("E");
+                            or.addHijos(tree(root.ChildNodes.ElementAt(0)));
+                            or.addHijos(new Node("||"));
+                            or.addHijos(tree(root.ChildNodes.ElementAt(2)));
+
+                            return or;
                         default: //(E)
                             Node par = new Node("E");
                             par.addHijos(tree(root.ChildNodes.ElementAt(1)));

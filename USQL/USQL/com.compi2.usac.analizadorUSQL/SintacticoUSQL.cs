@@ -30,6 +30,7 @@ namespace USQL.com.compi2.usac.analizador
             }
 
             RecorridoUSQL.arbolAST(raiz);
+            //RecorridoUSQL.resultado(raiz);
             //generarImagen(raiz);
             return true;
         }
