@@ -8,6 +8,7 @@ using Irony.Parsing;
 using System.Drawing;
 using System.IO;
 using USQL.com.compi2.usac.controlDot;
+using USQL.com.compi2.usac.treeAST;
 using System.Windows.Forms;
 using System.Diagnostics;
 
@@ -29,6 +30,7 @@ namespace USQL.com.compi2.usac.analizador
             }
 
             RecorridoUSQL.arbolAST(raiz);
+            //generarImagen(raiz);
             return true;
         }
 

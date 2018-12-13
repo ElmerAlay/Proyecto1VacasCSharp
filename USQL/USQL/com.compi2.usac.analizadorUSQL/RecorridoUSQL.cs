@@ -13,8 +13,6 @@ namespace USQL.com.compi2.usac.analizador
     class RecorridoUSQL
     {
         public static String cadena="";
-        public static Node root = null;
-        public static int contador = 0;
 
         public static void resultado(ParseTreeNode root)
         {
@@ -34,6 +32,7 @@ namespace USQL.com.compi2.usac.analizador
         public static void arbolAST(ParseTreeNode root)
         {
             graficarAst.generarImagen(tree(root));
+            Recorrer.resultado(tree(root));
         }
 
         public static Node tree(ParseTreeNode root)
@@ -47,11 +46,46 @@ namespace USQL.com.compi2.usac.analizador
                         raiz.addHijos(tree(root.ChildNodes.ElementAt(0)));
                         return raiz;
                     }
+                    else if (String.Compare(root.ToString(), "COND") == 0)
+                    {
+                        Node aux = new Node("COND");
+                        Node raiz = new Node(root.ChildNodes.ElementAt(0).ToString());
+
+                        aux.addHijos(raiz);
+                        return aux;
+                    }
+                    else if (String.Compare(root.ToString(), "SENTS") == 0)
+                    {
+                        Node aux = new Node("SENTS");
+
+                        aux.addHijos(tree(root.ChildNodes.ElementAt(0)));
+                        return aux;
+                    }
+                    else if (String.Compare(root.ToString(), "SENT") == 0)
+                    {
+                        Node aux = new Node("SENT");
+                        aux.addHijos(tree(root.ChildNodes.ElementAt(0)));
+
+                        return aux;
+                    }
                     else
                     {
+                        Node aux = new Node("E");
                         Node hoja = new Node(root.ChildNodes.ElementAt(0).ToString());
-                        return hoja;
+
+                        aux.addHijos(hoja);
+                        return aux;
                     }
+                case 2:
+                    if (String.Compare(root.ToString(), "SENTS") == 0)
+                    {
+                        Node aux = new Node("SENTS");
+
+                        aux.addHijos(tree(root.ChildNodes.ElementAt(0)));
+                        aux.addHijos(tree(root.ChildNodes.ElementAt(1)));
+                        return aux;
+                    }
+                    return null;
                 case 3: //Nodo binario
                     switch (root.ChildNodes.ElementAt(1).ToString().Substring(0, 1))
                     {
@@ -90,6 +124,27 @@ namespace USQL.com.compi2.usac.analizador
 
                             return par;
                     }
+                case 7:
+                    if (root.ToString().Equals("IF"))
+                    {
+                        Node aux = new Node("IF");
+                        aux.addHijos(tree(root.ChildNodes.ElementAt(2)));
+                        aux.addHijos(tree(root.ChildNodes.ElementAt(5)));
+
+                        return aux;
+                    }
+                    return null;
+                case 11:
+                    if (root.ToString().Equals("IF"))
+                    {
+                        Node aux = new Node("IF");
+                        aux.addHijos(tree(root.ChildNodes.ElementAt(2)));
+                        aux.addHijos(tree(root.ChildNodes.ElementAt(5)));
+                        aux.addHijos(tree(root.ChildNodes.ElementAt(9)));
+
+                        return aux;
+                    }
+                    return null;
             }
 
             return null;

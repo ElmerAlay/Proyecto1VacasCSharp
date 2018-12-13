@@ -64,12 +64,20 @@
     <Compile Include="com.compi2.usac.controlArchivos\ControlElementosArchivo.cs" />
     <Compile Include="com.compi2.usac.controlArchivos\LecturaArchivos.cs" />
     <Compile Include="com.compi2.usac.controlDot\ControlDot.cs" />
+    <Compile Include="com.compi2.usac.patronInterprete\Constante.cs" />
+    <Compile Include="com.compi2.usac.patronInterprete\div.cs" />
+    <Compile Include="com.compi2.usac.patronInterprete\If.cs" />
+    <Compile Include="com.compi2.usac.patronInterprete\Mult.cs" />
+    <Compile Include="com.compi2.usac.patronInterprete\Addition.cs" />
+    <Compile Include="com.compi2.usac.patronInterprete\ASTNode.cs" />
+    <Compile Include="com.compi2.usac.patronInterprete\Subtraction.cs" />
     <Compile Include="com.compi2.usac.socket\Servidor.cs" />
     <Compile Include="com.compi2.usac.tablaSimbolos\Entorno.cs" />
     <Compile Include="com.compi2.usac.tablaSimbolos\Simbolo.cs" />
     <Compile Include="com.compi2.usac.treeAST\controlDot.cs" />
     <Compile Include="com.compi2.usac.treeAST\graficarAst.cs" />
     <Compile Include="com.compi2.usac.treeAST\Node.cs" />
+    <Compile Include="com.compi2.usac.treeAST\Recorrer.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
