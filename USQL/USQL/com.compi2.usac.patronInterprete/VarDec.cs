@@ -7,20 +7,21 @@ using USQL.com.compi2.usac.tablaSimbolos;
 
 namespace USQL.com.compi2.usac.patronInterprete
 {
-    class Constante : ASTNode
+    class VarDec : ASTNode
     {
-        private Object valor;
+        private String name;
+        private Simbolo sim;
 
-        public Constante(Object valor)
-            : base()
+        public VarDec(String name, Simbolo sim) : base()
         {
-            this.valor = valor;
+            this.name = name;
+            this.sim = sim;
         }
 
         public Object execute(Entorno actual)
         {
-            return valor;
+            actual.put(name, sim);
+            return null;
         }
-
     }
 }

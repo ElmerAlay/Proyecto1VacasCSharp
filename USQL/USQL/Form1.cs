@@ -50,7 +50,6 @@ namespace USQL
 
             if (resultado)
             {
-
                 rtb_consola.Text = "Correcto";
             }
             else

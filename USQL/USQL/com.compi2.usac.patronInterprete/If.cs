@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Collections;
+using USQL.com.compi2.usac.tablaSimbolos;
 
 namespace USQL.com.compi2.usac.patronInterprete
 {
@@ -20,20 +21,20 @@ namespace USQL.com.compi2.usac.patronInterprete
             this.elsebody = elsebody;
         }
 
-        public Object execute()
+        public Object execute(Entorno actual)
         {
-            if (Convert.ToBoolean(condition.execute()))
+            if (Convert.ToBoolean(condition.execute(actual)))
             {
                 foreach (ASTNode n in body)
                 {
-                    n.execute();
+                    n.execute(actual);
                 }
             }
             else
             {
                 foreach (ASTNode n in elsebody)
                 {
-                    n.execute();
+                    n.execute(actual);
                 }
             }
             return null;

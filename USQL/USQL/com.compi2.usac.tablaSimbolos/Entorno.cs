@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace USQL.com.compi2.usac.tablaSimbolos
 {
@@ -22,15 +23,20 @@ namespace USQL.com.compi2.usac.tablaSimbolos
         {
             if (!exists(s))
                 tabla.Add(s, sim);
+            else
+            {
+                Console.WriteLine("Error!!! La variable ya está declarada en este entorno!!!");
+                MessageBox.Show("Error!!! La variable ya está declarada en este entorno!!!");
+            }
         }
 
         public Simbolo get(String s)
         {
             for (Entorno e = this; e != null; e = e.ant)
             {
-                //Simbolo encontro = (Simbolo)(e.tabla.(s));
-                //if (encontro != null)
-                //    return encontro;
+                Simbolo encontro = (Simbolo)(e.tabla[s]);
+                if (encontro != null)
+                    return encontro;
             }
             return null;
         }
@@ -39,12 +45,17 @@ namespace USQL.com.compi2.usac.tablaSimbolos
         {
             for (Entorno e = this; e != null; e = e.ant)
             {
-                //Simbolo encontro = (Simbolo)(e.tabla.(s));
-                //if (encontro != null)
-                //    return true;
+                Simbolo encontro = (Simbolo)(e.tabla[s]);
+                if (encontro != null)
+                    return true;
             }
 
             return false;
+        }
+
+        public Hashtable getHashTable()
+        {
+            return this.tabla;
         }
     }
 }

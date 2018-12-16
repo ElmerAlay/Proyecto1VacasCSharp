@@ -81,6 +81,9 @@
     <Compile Include="com.compi2.usac.patronInterprete\OR.cs" />
     <Compile Include="com.compi2.usac.patronInterprete\Potencia.cs" />
     <Compile Include="com.compi2.usac.patronInterprete\Subtraction.cs" />
+    <Compile Include="com.compi2.usac.patronInterprete\VarAsign.cs" />
+    <Compile Include="com.compi2.usac.patronInterprete\VarDec.cs" />
+    <Compile Include="com.compi2.usac.patronInterprete\VarRef.cs" />
     <Compile Include="com.compi2.usac.socket\Servidor.cs" />
     <Compile Include="com.compi2.usac.tablaSimbolos\Entorno.cs" />
     <Compile Include="com.compi2.usac.tablaSimbolos\Simbolo.cs" />

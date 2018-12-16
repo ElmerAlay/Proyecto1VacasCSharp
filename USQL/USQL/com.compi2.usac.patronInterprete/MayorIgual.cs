@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using USQL.com.compi2.usac.tablaSimbolos;
 
 namespace USQL.com.compi2.usac.patronInterprete
 {
@@ -17,9 +18,9 @@ namespace USQL.com.compi2.usac.patronInterprete
             this.operand2 = operand2;
         }
 
-        public Object execute()
+        public Object execute(Entorno actual)
         {
-            return Convert.ToDouble(operand1.execute()) >= Convert.ToDouble(operand2.execute());
+            return Convert.ToDouble(operand1.execute(actual)) >= Convert.ToDouble(operand2.execute(actual));
         }
     }
 }

@@ -15,13 +15,15 @@ namespace USQL.com.compi2.usac.analizador
         {
             #region EXPRESIONES REGULARES
             RegexBasedTerminal numero = new RegexBasedTerminal("numero", "[0-9]+");
-            RegexBasedTerminal flotante = new RegexBasedTerminal("flotante","[0-9]+.[0-9]+");
-            RegexBasedTerminal date = new RegexBasedTerminal("date", "(0?[1-9]|[1-2][0-9]|3[0-1])-(0?[1-9]|1[0-2])-[0-9]{4}");
-            DataLiteralBase datetime = new DataLiteralBase("datetime", TypeCode.DateTime);
+            RegexBasedTerminal flotante = new RegexBasedTerminal("flotante","([0-9]+)\\.([0-9]+)");
+            RegexBasedTerminal fecha = new RegexBasedTerminal("fecha", "(0?[1-9]|[1-2][0-9]|3[0-1])-(0?[1-9]|1[0-2])-[0-9]{4}");
+            DataLiteralBase fechahora = new DataLiteralBase("fechahora", TypeCode.DateTime);
             IdentifierTerminal id = new IdentifierTerminal("id");
+            RegexBasedTerminal variable = new RegexBasedTerminal("variable", "@([a-zA-ZñÑ])([a-zA-ZñÑ0-9_])*");
             StringLiteral cadenaNormal = TerminalFactory.CreateCSharpString("cadenaNormal");
             StringLiteral cadena = new StringLiteral("cadenaNormal", "\"");
-            StringLiteral fechahora = new StringLiteral("datetime", "'");
+            StringLiteral stringfechahora = new StringLiteral("fechahora","'");
+            StringLiteral stringfecha = new StringLiteral("fecha", "'");
             #endregion
 
             #region TERMINALES
@@ -42,7 +44,20 @@ namespace USQL.com.compi2.usac.analizador
             var or = ToTerm("||");
             var not = ToTerm("!");
 
-            var token_If = ToTerm("if");
+            var texto = ToTerm("text");
+            var integer = ToTerm("integer");
+            var doble = ToTerm("double");
+            var boolean = ToTerm("boolean");
+            var tipodate = ToTerm("date");
+            var datetime = ToTerm("datetime");
+
+            var declarar = ToTerm("declarar");
+
+            var coma = ToTerm(",");
+            var puntoycoma = ToTerm(";");
+            var asign = ToTerm("=");
+
+            var token_If = ToTerm("si");
             var token_else = ToTerm("else");
 
             var llave_o = ToTerm("{");
@@ -50,10 +65,10 @@ namespace USQL.com.compi2.usac.analizador
             var par_o = ToTerm("(");
             var par_c = ToTerm(")");
 
-            var verdad = ToTerm("true");
-            var falso = ToTerm("false");
+            var retornar = ToTerm("retornar");
+            var detener = ToTerm("detener");
 
-            var mientras = ToTerm("while");
+            var mientras = ToTerm("mientras");
             #endregion
 
             #region NO TERMINALES
@@ -61,26 +76,39 @@ namespace USQL.com.compi2.usac.analizador
             E = new NonTerminal("E"),
             IF = new NonTerminal("IF"),
             WHILE = new NonTerminal("WHILE"),
-            COND = new NonTerminal("COND"),
             SENTS = new NonTerminal("SENTS"),
-            SENT = new NonTerminal("SENT");
+            SENT = new NonTerminal("SENT"),
+            TIPO = new NonTerminal("TIPO"),
+            LVAR = new NonTerminal("LVAR"),
+            DEC = new NonTerminal("DEC");
             #endregion
 
             #region GRAMATICA
-            S.Rule = E
-                | IF;
+            S.Rule = DEC 
+                | E
+                | IF
+                | WHILE;
 
-            IF.Rule = token_If + par_o + COND + par_c + llave_o + SENTS + llave_c
-                | token_If + par_o + COND + par_c + llave_o + SENTS + llave_c + token_else + llave_o + SENTS + llave_c;
+            DEC.Rule = declarar + LVAR + TIPO + puntoycoma
+                | declarar + LVAR + TIPO + asign + E + puntoycoma;
 
-            COND.Rule = verdad | falso;
+            LVAR.Rule = LVAR + coma + variable
+                | variable;
+
+            TIPO.Rule = texto | integer | doble | boolean | tipodate | datetime;
+            
+            
+            IF.Rule = token_If + par_o + E + par_c + llave_o + SENTS + llave_c
+                | token_If + par_o + E + par_c + llave_o + SENTS + llave_c + token_else + llave_o + SENTS + llave_c;
 
             SENTS.Rule = SENTS + SENT
                 | SENT;
 
-            SENT.Rule = IF | E;
+            SENT.Rule = IF | E | retornar | detener;
 
-            WHILE.Rule = mientras + par_o + COND + par_c + llave_o + SENTS + llave_c;
+            WHILE.Rule = mientras + par_o + E + par_c + llave_o + SENTS + llave_c;
+
+
 
             E.Rule = E + plus + E
                 | E + minus + E
@@ -98,14 +126,12 @@ namespace USQL.com.compi2.usac.analizador
                 | par_o + E + par_c
                 | minus + E
                 | not + E
+                | cadena
                 | numero
                 | flotante
-                | date
-                | datetime
-                | verdad
-                | falso
+                | stringfecha
                 | id
-                | cadena;
+                | variable;
             #endregion
 
             #region PREFERENCIAS
